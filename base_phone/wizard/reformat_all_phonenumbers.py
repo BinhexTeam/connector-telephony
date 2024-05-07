@@ -27,8 +27,6 @@ class ReformatAllPhonenumbers(models.TransientModel):
         for obj_dict in phoneobjects:
             fields = obj_dict["fields"]
             obj = obj_dict["object"]
-            if not hasattr(obj, "_phone_format"):
-                continue
             logger.info(
                 "Starting to reformat phone numbers on object %s " "(fields = %s)",
                 obj._name,
@@ -40,7 +38,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 vals = {}
                 for field in fields:
                     if entry[field]:
-                        new_phone = entry._phone_format(entry[field])
+                        new_phone = entry.phone_format(entry[field])
                         if new_phone != entry[field]:
                             vals[field] = new_phone
                 if vals:

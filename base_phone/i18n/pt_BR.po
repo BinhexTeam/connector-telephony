@@ -36,18 +36,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:74
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Click2dial com sucesso"
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:56
-#, python-format
-msgid "Click2dial to %s"
-msgstr "Click2dial para %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -76,7 +69,8 @@ msgid "Contact"
 msgstr "Contato"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:78
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
 msgid "Create New Partner"
@@ -110,26 +104,32 @@ msgid "Current Phone"
 msgstr "Telefone Atual"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/xml/phone.xml:12
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.xml:0
 #, python-format
 msgid "Dial"
 msgstr "Discar"
 
 #. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Dial phone"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
 msgid "Display Name"
 msgstr "Exibir Nome"
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__done
 msgid "Done"
 msgstr "Feito"
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__draft
 msgid "Draft"
 msgstr "Rascunho"
 
@@ -144,7 +144,7 @@ msgid "E.164 equivalent of the calling number."
 msgstr "E.164 equivalente do número de chamada."
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__phone
 msgid "Fixed"
 msgstr "FIxo"
 
@@ -155,7 +155,6 @@ msgstr "Fixo/Móvel"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 msgid "ID"
 msgstr "Identificação"
@@ -183,7 +182,6 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
 msgid "Last Modified on"
 msgstr "Última Modificação no"
@@ -201,13 +199,14 @@ msgid "Last Updated on"
 msgstr "Última atualização em"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:48
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
 msgstr "País ausente na empresa %s"
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__mobile
 msgid "Mobile"
 msgstr "Celular"
 
@@ -220,13 +219,6 @@ msgstr "Número Não Encontrado"
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
 msgstr "Número convertido para formato internacional:"
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:75
-#, python-format
-msgid "Number dialed: %s"
-msgstr "Número descado: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
@@ -255,7 +247,8 @@ msgid "Partner to Update"
 msgstr "Parceiro a Atualizar"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:96
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
 msgstr "Parceiro: %s"
@@ -302,7 +295,8 @@ msgid "Reformat all phone numbers"
 msgstr "Formatar todos os números de telefone"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:92
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Partner to Update."
 msgstr "Escolha o Parceiro a Atualizar."
@@ -328,12 +322,11 @@ msgstr "Telefonia"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
-#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form_simple_modif
 msgid "Telephony Preferences"
 msgstr "Preferências de telefonia"
 
 #. module: base_phone
-#: sql_constraint:res.company:0
+#: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
 "The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
@@ -350,8 +343,8 @@ msgstr ""
 "todas as empresas no formato padrão internacional, por exemplo, +33141981242"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:57
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr "Atenda o telefone que está tocando"
@@ -360,3 +353,11 @@ msgstr "Atenda o telefone que está tocando"
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Update Existing Partner"
 msgstr "Atualizar Empresa existente"
+
+#, python-format
+#~ msgid "Click2dial to %s"
+#~ msgstr "Click2dial para %s"
+
+#, python-format
+#~ msgid "Number dialed: %s"
+#~ msgstr "Número descado: %s"

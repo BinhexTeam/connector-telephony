@@ -23,8 +23,9 @@
         "wizard/number_not_found_view.xml",
     ],
     "assets": {
-        "web.assets_backend": ["/base_phone/static/src/js/phone_widget.js"],
-        "web.assets_qweb": ["/base_phone/static/src/xml/phone.xml"],
+        "web.assets_backend": [
+            "base_phone/static/src/components/**/*",
+        ],
     },
     "installable": True,
 }

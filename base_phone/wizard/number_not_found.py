@@ -54,9 +54,8 @@ class NumberNotFound(models.TransientModel):
         if res.get("calling_number"):
             if not self.env.company.country_id:
                 raise UserError(
-                    _("Missing country on company %s") % self.env.company.display_name
+                    _("Missing country on company %s" % self.env.company.display_name)
                 )
-
             country_code = self.env.company.country_id.code
             try:
                 parsed_num = phonenumbers.parse(res["calling_number"], country_code)
@@ -101,7 +100,7 @@ class NumberNotFound(models.TransientModel):
             raise UserError(_("Select the Partner to Update."))
         self.to_update_partner_id.write({self.number_type: self.e164_number})
         action = {
-            "name": _("Partner: %s") % self.to_update_partner_id.name,
+            "name": _("Partner: %s" % self.to_update_partner_id.name),
             "type": "ir.actions.act_window",
             "res_model": "res.partner",
             "view_mode": "form,tree,kanban",

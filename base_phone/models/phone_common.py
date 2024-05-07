@@ -66,14 +66,13 @@ class PhoneCommon(models.AbstractModel):
                 obj._name,
                 end_number_to_match,
             )
-            sql = "SELECT id FROM %s " % obj._table
+            sql = "SELECT id FROM %s WHERE " % obj._table
             sql_where = []
             sql_args = []
             for field in obj_dict["fields"]:
                 sql_where.append("replace(%s, ' ', '') ilike %%s" % field)
                 sql_args.append(pg_search_number)
-            if sql_where:
-                sql += " WHERE " + " or ".join(sql_where)
+            sql += " or ".join(sql_where)
             _logger.debug(
                 "get_record_from_phone_number sql=%s sql_args=%s", sql, sql_args
             )
@@ -119,17 +118,17 @@ class PhoneCommon(models.AbstractModel):
                 senv = self.with_context(callerid=True).env[model_name]
             except Exception:
                 continue
-            if not isinstance(senv, models.Model):
-                continue
-            if hasattr(senv, "_phone_get_number_fields"):
+            if (
+                hasattr(senv, "_phone_name_sequence")
+                and isinstance(senv._phone_name_sequence, int)
+                and hasattr(senv, "_phone_name_fields")
+                and isinstance(senv._phone_name_fields, list)
+            ):
                 cdict = {
                     "object": senv,
-                    "fields": senv._phone_get_number_fields(),
+                    "fields": senv._phone_name_fields,
                 }
-                seq = 100
-                if hasattr(senv, "_phone_name_sequence"):
-                    seq = senv._phone_name_sequence
-                phoneobj.append((seq, cdict))
+                phoneobj.append((senv._phone_name_sequence, cdict))
 
         phoneobj_sorted = sorted(phoneobj, key=lambda element: element[0])
         res = []

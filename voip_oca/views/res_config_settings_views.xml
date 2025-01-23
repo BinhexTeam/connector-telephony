@@ -2,19 +2,28 @@
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.voip_oca</field>
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//block[@name='integration']//setting[@id='cf-turnstile']" position="after">
-                <setting help="Schedule and make calls from any app you're using." id="cf-asteriks-voip">
-                    <field name="asteriks_voip"/>
+            <xpath
+                expr="//block[@name='integration']//setting[@id='cf-turnstile']"
+                position="after"
+            >
+                <setting
+                    help="Schedule and make calls from any app you're using."
+                    id="cf-asteriks-voip"
+                >
+                    <field name="asteriks_voip" />
                     <div class="content-group" invisible="not asteriks_voip">
                         <div class="row mt16">
-                            <label for="pbx_ip" class="col-4 col-lg-4 o_light_label"/>
-                            <field name="pbx_ip" nolabel="1"/>
-                            <label for="ws_server" class="col-4 col-lg-4 o_light_label"/>
-                            <field name="ws_server" nolabel="1"/>
-                            <label for="mode" class="col-4 col-lg-4 o_light_label"/>
-                            <field name="mode" nolabel="1"/>
+                            <label for="pbx_ip" class="col-4 col-lg-4 o_light_label" />
+                            <field name="pbx_ip" nolabel="1" />
+                            <label
+                                for="ws_server"
+                                class="col-4 col-lg-4 o_light_label"
+                            />
+                            <field name="ws_server" nolabel="1" />
+                            <label for="mode" class="col-4 col-lg-4 o_light_label" />
+                            <field name="mode" nolabel="1" />
                         </div>
                     </div>
                 </setting>

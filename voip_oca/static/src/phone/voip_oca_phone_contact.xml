@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOCAPhoneContact">
+        <div
+            class="o-voip-VoipOCAPhoneContact position-absolute d-flex flex-column bg-white p-2"
+        >
+           Contact
+        </div>
+    </t>
+</templates>

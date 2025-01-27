@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOcaPhone">
+        <div
+            class="o-voip-VoipOcaPhone position-absolute d-flex flex-column bg-white w-100 w-md-25 h-100 h-md-75 mx-0 mx-md-3 bottom-0 shadow ml-3"
+        >
+            <div
+                class="o-voip-VoipOcaPhone-bar p-2 text-white d-flex justify-content-between align-items-center"
+            >
+                <div>
+                    <span class="oi oi-large oi-voip mx-2" />
+                    <span class="text-white">Voip</span>
+                </div>
+                <div>
+                <button class="btn btn-small text-white" type="button">
+                    <i class="fa fa-close" />
+                </button>
+                </div>
+            </div>
+            <div class="o-voip-VoipOcaPhone-content">
+                <div class="d-flex">
+                            <input
+                        class="flex-grow-1 w-100 p-2 border-0"
+                        placeholder="Search"
+                        t-model.trim="phoneModel.searchInputValue"
+                        t-ref="searchInput"
+                        t-on-input="onInputSearchBar"
+                    />
+                    <button class="oi oi-search btn shadow-none px-2" />
+                        </div>
+
+                <ul class="nav nav-tabs">
+                  <li class="nav-item" t-foreach="tabList" t-as="tab" t-key="tab.id">
+                    <a
+                            t-attf-class="nav-link #{phoneModel.activeTabId == tab.id ? 'active' : ''}"
+                            aria-current="page"
+                            href="#"
+                            t-att-data-id="tab.id"
+                            role="tab"
+                            t-esc="tab.name"
+                            data-bs-toggle="tab"
+                            t-on-click="onClickTab"
+                        />
+                  </li>
+                </ul>
+                <div class="tab-content">
+                     <VoipOCAPhoneRecent t-if="activeTabId == 'recent'" />
+                    <VoipOCAPhoneActivity t-if="activeTabId == 'activity'" />
+                    <VoipOCAPhoneContact t-if="activeTabId == 'contacts'" />
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

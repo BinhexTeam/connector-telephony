@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOCAPhoneRecent">
+        <div
+            class="o-voip-VoipOCAPhoneRecent position-absolute d-flex flex-column bg-white p-3"
+        >
+            <span>Name</span>
+            <span>Call to name</span>
+            <span>Fecha, hora</span>
+        </div>
+    </t>
+</templates>

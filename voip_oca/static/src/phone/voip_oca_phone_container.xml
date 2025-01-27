@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOCAPhoneContainer">
+        <div class="o-voip-VoipOCAPhoneContainer">
+            <VoipOcaPhone t-if="this.voip_oca.phoneOCA.isDisplayed" />
+        </div>
+    </t>
+</templates>

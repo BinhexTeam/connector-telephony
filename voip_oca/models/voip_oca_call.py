@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv import expression
 
 VOIP_STATES = [
@@ -10,7 +10,7 @@ VOIP_STATES = [
     ("terminated", "Terminated"),
 ]
 
-VOIP_DIRECTION = [
+VOIP_TYPE_CALL = [
     ("incoming", "Incoming"),
     ("outgoing", "Outgoing"),
 ]
@@ -21,10 +21,9 @@ class VoipOcaCall(models.Model):
     _description = "Voip OCA Call"
 
     phone_number = fields.Char(related="partner_id.phone", store=True)
-    direction = fields.Selection(
-        VOIP_DIRECTION,
+    type_call = fields.Selection(
+        VOIP_TYPE_CALL,
         default="outgoing",
-        readonly=True,
     )
     state = fields.Selection(VOIP_STATES, default="calling", index=True)
     end_date = fields.Datetime()
@@ -39,53 +38,18 @@ class VoipOcaCall(models.Model):
 
     @api.depends("state", "partner_id.name")
     def _compute_display_name(self):
-        def get_name(call):
-            if call.activity_name:
-                return call.activity_name
-            if call.state == "aborted":
-                return _(
-                    "Aborted call to %(phone_number)s", phone_number=call.phone_number
-                )
-            if call.state == "missed":
-                return _(
-                    "Missed call from %(phone_number)s", phone_number=call.phone_number
-                )
-            if call.state == "rejected":
-                if call.direction == "incoming":
-                    return _(
-                        "Rejected call from %(phone_number)s",
-                        phone_number=call.phone_number,
-                    )
-                return _(
-                    "Rejected call to %(phone_number)s", phone_number=call.phone_number
-                )
-            if call.partner_id:
-                if call.direction == "incoming":
-                    return _(
-                        "Call from %(correspondent)s",
-                        correspondent=call.partner_id.name,
-                    )
-                return _(
-                    "Call to %(correspondent)s", correspondent=call.partner_id.name
-                )
-            if call.direction == "incoming":
-                return _("Call from %(phone_number)s", phone_number=call.phone_number)
-            return _("Call to %(phone_number)s", phone_number=call.phone_number)
+        for rec in self:
+            rec.display_name = rec.partner_id.display_name
 
-        for call in self:
-            call.display_name = get_name(call)
-
-    def _format_calls(self):
+    def _format(self):
         return [
             {
                 "id": call.id,
                 "creationDate": call.create_date,
-                "direction": call.direction,
+                "typeCall": call.type_call,
                 "displayName": call.display_name,
                 "endDate": call.end_date,
-                "partner": call.partner_id._format_contacts()[0]
-                if call.partner_id
-                else False,
+                "partner": call.partner_id._format()[0] if call.partner_id else False,
                 "phoneNumber": call.phone_number,
                 "startDate": call.start_date,
                 "state": call.state,
@@ -104,4 +68,4 @@ class VoipOcaCall(models.Model):
             domain += search_domain
         return self.search(
             domain, offset=offset, limit=limit, order="create_date DESC"
-        )._format_calls()
+        )._format()

@@ -1,10 +1,10 @@
 /** @odoo-module **/
 import {Component, useRef, useState} from "@odoo/owl";
-import {isEventHandled, markEventHandled} from "@web/core/utils/misc";
 import {PhoneActivity} from "./phone_activity.esm";
 import {PhoneContact} from "./phone_contact.esm";
 import {PhoneRecent} from "./phone_recent.esm";
 import {_t} from "@web/core/l10n/translation";
+import {markEventHandled} from "@web/core/utils/misc";
 import {useDebounced} from "@web/core/utils/timing";
 import {useService} from "@web/core/utils/hooks";
 
@@ -27,7 +27,7 @@ export class VoipOcaPhone extends Component {
     get tabList() {
         return [
             {id: "recent", name: _t("Recent")},
-            {id: "activity", name: _t("Next Activities")},
+            {id: "activity", name: _t("Activities")},
             {id: "contacts", name: _t("Contacts")},
         ];
     }
@@ -59,9 +59,11 @@ export class VoipOcaPhone extends Component {
         this.phoneModel.hide();
     }
 
-    onClickBar(ev) {
-        if (isEventHandled(ev, "Phone.close")) {
-            return;
+    onClickBar() {
+        if (this.voip_oca.phoneModel.isFolded) {
+            this.phoneModel.unfold();
+        } else {
+            this.phoneModel.fold();
         }
     }
 }

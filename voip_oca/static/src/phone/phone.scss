@@ -26,5 +26,9 @@ div.o-voip-VoipOcaPhone {
     }
 
     div.o-voip-VoipOcaPhone-content {
+        overflow-y: auto !important;
+        ul > li {
+            width: 33.3% !important;
+        }
     }
 }

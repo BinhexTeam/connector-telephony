@@ -17,7 +17,7 @@
     "assets": {
         "web.assets_backend": [
             "voip_oca/static/src/scss/mixins.scss",
-            "voip_oca/static/src/phone/phone.scss",
+            "voip_oca/static/src/**/*.scss",
             "voip_oca/static/src/**/*.xml",
             "voip_oca/static/src/**/*.js",
         ],

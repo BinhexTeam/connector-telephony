@@ -13,6 +13,10 @@ export class PhoneRecent extends Component {
         this.voip_oca = useState(useService("voip_oca"));
         onMounted(() => this.voip_oca.getRecentCalls());
     }
+
+    onCallDetail(call) {
+        return call;
+    }
 }
 
 PhoneRecent.template = "voip_oca.PhoneRecent";

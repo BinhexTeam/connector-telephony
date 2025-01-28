@@ -44,4 +44,18 @@ export class PhoneModel {
         })();
         return filteredCalls.sort((a, b) => a.id < b.id);
     }
+
+    get contacts() {
+        return Object.values(this.store.Persona.records).filter(
+            (contact) =>
+                contact.hasPhoneNumber &&
+                (!this.searchInputValue ||
+                    [
+                        contact.name,
+                        contact.displayName,
+                        contact.mobileNumber,
+                        contact.landlineNumber,
+                    ].some((x) => isSubstring(x, this.searchInputValue)))
+        );
+    }
 }

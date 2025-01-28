@@ -7,7 +7,7 @@
                 <tree editable="top">
                     <field name="display_name" />
                     <field name="phone_number" />
-                    <field name="direction" />
+                    <field name="type_call" />
                     <field name="state" />
                     <field name="start_date" />
                     <field name="end_date" />

@@ -16,6 +16,7 @@ export class VoipOCA {
         this.store = services["mail.store"];
         this.ormService = services.orm;
         this.phoneModel = new PhoneModel(this.store, this);
+        this.baseUrlImage = "/web/image";
         this.messaging.isReady.then(() => {
             this.isReady.resolve();
         });
@@ -27,18 +28,11 @@ export class VoipOCA {
         return this.store.Call.records;
     }
 
-    getContacts(searchInputValue = "") {
-        return [searchInputValue];
-    }
-
     getActivities(searchInputValue = "") {
         return [searchInputValue];
     }
 
     async getRecentCalls(offset = 0, limit = 10) {
-        if (this._recentCallsData) {
-            this._recentCallsData.abort();
-        }
         this._recentCallsData = this.ormService.call(
             "voip.oca.call",
             "get_recent_calls",
@@ -49,17 +43,22 @@ export class VoipOCA {
                 search_terms: this.phoneModel.searchInputValue,
             }
         );
-        try {
-            const callsData = await this._recentCallsData;
-            callsData.forEach((data) => this.store.Call.insert(data));
-            this._recentCallsData = null;
-        } catch (error) {
-            if (error.event?.type === "abort") {
-                error.event.preventDefault();
-            } else {
-                this._recentCallsData = null;
-            }
-        }
+        const callsData = await this._recentCallsData;
+        callsData.forEach((data) => this.store.Call.insertCall(data));
+        this._recentCallsData = null;
+    }
+
+    async getContacts(_search = "", offset = 0, limit = 13) {
+        this._contactData = this.ormService.call("res.partner", "get_contacts", [], {
+            offset,
+            limit,
+            _search,
+        });
+        const contactsData = await this._contactData;
+        contactsData.forEach((contactData) =>
+            this.store.Persona.insert({...contactData, type: "partner"})
+        );
+        this._contactData = null;
     }
 }
 

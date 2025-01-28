@@ -2,8 +2,8 @@
 
 import {Record} from "@mail/core/common/record";
 import {assignDefined} from "@mail/utils/common/misc";
-
 import {deserializeDateTime} from "@web/core/l10n/dates";
+import {url} from "@web/core/utils/urls";
 import {_t} from "@web/core/l10n/translation";
 
 export class Call extends Record {
@@ -15,7 +15,7 @@ export class Call extends Record {
      * @param {Object} data
      * @returns {Call}
      */
-    static insert(data) {
+    static insertCall(data) {
         const call = this.get(data) ?? this.new(data);
         if (data.partner) {
             data.partner = this.store.Persona.insert({
@@ -37,26 +37,16 @@ export class Call extends Record {
     }
 
     activity;
-    /** @type {luxon.DateTime} */
     creationDate;
-    /** @type {"incoming"|"outgoing"} */
-    direction;
-    /** @type {string} */
+    typeCall;
     displayName;
-    /** @type {luxon.DateTime} */
     endDate;
-    /** @type {import("@mail/core/persona_model").Persona | undefined} */
     partner;
-    /** @type {string} */
     phoneNumber;
-    /** @type {luxon.DateTime} */
     startDate;
-    /** @type {"aborted"|"calling"|"missed"|"ongoing"|"rejected"|"terminated"} */
     state;
-    /** @type {{ interval: number, time: number }} */
     timer;
 
-    /** @returns {string} */
     get callDate() {
         if (this.state === "terminated") {
             return this.startDate.toLocaleString(luxon.DateTime.DATETIME_SHORT);
@@ -64,7 +54,6 @@ export class Call extends Record {
         return this.creationDate.toLocaleString(luxon.DateTime.DATETIME_SHORT);
     }
 
-    /** @returns {number} */
     get duration() {
         if (!this.startDate || !this.endDate) {
             return 0;
@@ -72,7 +61,20 @@ export class Call extends Record {
         return (this.endDate - this.startDate) / 1000;
     }
 
-    /** @returns {string} */
+    get iconTypeCall() {
+        return this.typeCall === "incoming"
+            ? "fa fa-long-arrow-left"
+            : "fa fa-long-arrow-right";
+    }
+
+    get imagePartner() {
+        return url("/web/image", {
+            model: "res.partner",
+            id: this.partner.id,
+            field: "avatar_128",
+        });
+    }
+
     get durationString() {
         if (!this.duration) {
             return "";

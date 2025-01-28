@@ -1,0 +1,3 @@
+@mixin min-height-phone($maxHeight: 100%) {
+    min-height: $maxHeight !important;
+}

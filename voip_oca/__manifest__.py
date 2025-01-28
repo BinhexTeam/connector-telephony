@@ -10,11 +10,14 @@
     # always loaded
     "data": [
         "security/ir.model.access.csv",
+        "views/voip_oca_call.xml",
         "views/res_config_settings_views.xml",
+        "views/menus.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "voip_oca/static/src/**/*.scss",
+            "voip_oca/static/src/scss/mixins.scss",
+            "voip_oca/static/src/phone/phone.scss",
             "voip_oca/static/src/**/*.xml",
             "voip_oca/static/src/**/*.js",
         ],

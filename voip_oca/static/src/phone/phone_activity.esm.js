@@ -2,7 +2,7 @@
 
 import {Component} from "@odoo/owl";
 
-export class VoipOCAPhoneActivity extends Component {
+export class PhoneActivity extends Component {
     static props = {};
 
     setup() {
@@ -10,4 +10,4 @@ export class VoipOCAPhoneActivity extends Component {
     }
 }
 
-VoipOCAPhoneActivity.template = "voip_oca.VoipOCAPhoneActivity";
+PhoneActivity.template = "voip_oca.PhoneActivity";

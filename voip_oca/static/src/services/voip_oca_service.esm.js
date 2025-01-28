@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
 import {Deferred} from "@web/core/utils/concurrency";
-import {VoipOCAPhoneContainer} from "@voip_oca/phone/voip_oca_phone_container.esm";
-import {VoipOCAPhoneModel} from "@voip_oca/phone/voip_oca_phone_model.esm";
+import {PhoneModel} from "@voip_oca/phone/models/phone_model.esm";
+import {VoipOCAPhoneContainer} from "@voip_oca/phone/phone_container.esm";
 import {VoipOCASystray} from "@voip_oca/web/voip_oca_systray.esm";
 import {reactive} from "@odoo/owl";
 import {registry} from "@web/core/registry";
@@ -14,12 +14,17 @@ export class VoipOCA {
         this.env = env;
         this.messaging = services["mail.messaging"];
         this.store = services["mail.store"];
-        this.phoneOCA = new VoipOCAPhoneModel(this.store, this);
+        this.ormService = services.orm;
+        this.phoneModel = new PhoneModel(this.store, this);
         this.messaging.isReady.then(() => {
             this.isReady.resolve();
         });
 
         return reactive(this);
+    }
+
+    get calls() {
+        return this.store.Call.records;
     }
 
     getContacts(searchInputValue = "") {
@@ -30,8 +35,31 @@ export class VoipOCA {
         return [searchInputValue];
     }
 
-    getRecents(searchInputValue = "") {
-        return [searchInputValue];
+    async getRecentCalls(offset = 0, limit = 10) {
+        if (this._recentCallsData) {
+            this._recentCallsData.abort();
+        }
+        this._recentCallsData = this.ormService.call(
+            "voip.oca.call",
+            "get_recent_calls",
+            [],
+            {
+                offset: offset,
+                limit: limit,
+                search_terms: this.phoneModel.searchInputValue,
+            }
+        );
+        try {
+            const callsData = await this._recentCallsData;
+            callsData.forEach((data) => this.store.Call.insert(data));
+            this._recentCallsData = null;
+        } catch (error) {
+            if (error.event?.type === "abort") {
+                error.event.preventDefault();
+            } else {
+                this._recentCallsData = null;
+            }
+        }
     }
 }
 
@@ -48,6 +76,8 @@ export const voipOCAService = {
         // "voip.call",
     ],
     async start(env, {user}) {
+        this.env = env;
+        this.user = user;
         registry.category("main_components").add("voip_oca.VoipOCAPhoneContainer", {
             Component: VoipOCAPhoneContainer,
         });

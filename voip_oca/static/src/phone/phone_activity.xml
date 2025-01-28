@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.PhoneActivity">
+        <div class="o-voip-PhoneActivity d-flex flex-column bg-white p-2">
+            Activity
+        </div>
+    </t>
+</templates>

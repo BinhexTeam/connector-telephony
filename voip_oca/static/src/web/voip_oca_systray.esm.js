@@ -11,8 +11,18 @@ export class VoipOCASystray extends Component {
         this.voip_oca = useState(useService("voip_oca"));
     }
 
-    onClick() {
-        return;
+    onClickOpenVoip() {
+        if (
+            !this.voip_oca.phoneModel.isDisplayed ||
+            !this.voip_oca.phoneModel.isFolded
+        ) {
+            this.voip_oca.isReady.then(() => {
+                this.voip_oca.phoneModel.show();
+                this.voip_oca.phoneModel.fold();
+            });
+        } else {
+            this.voip_oca.phoneModel.hide();
+        }
     }
 }
 

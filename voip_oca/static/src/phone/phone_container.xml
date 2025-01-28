@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
     <t t-name="voip_oca.VoipOCAPhoneContainer">
         <div class="o-voip-VoipOCAPhoneContainer">
-            <VoipOcaPhone t-if="this.voip_oca.phoneOCA.isDisplayed" />
+            <VoipOcaPhone t-if="this.voip_oca.phoneModel.isDisplayed" />
         </div>
     </t>
 </templates>

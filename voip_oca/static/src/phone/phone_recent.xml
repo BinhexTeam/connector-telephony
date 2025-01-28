@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.PhoneRecent">
+        <t t-foreach="props.recentCalls" t-as="call" t-key="call.id">
+        <div class="o-voip-PhoneRecent d-flex flex-column bg-white px-3 pt-2">
+            <div class="fw-bold" t-if="call.partner" t-esc="call.partner.name" />
+            <div t-esc="call.displayName" />
+            <div t-if="call.callDate" class="small text-muted">
+                        <t t-esc="call.callDate" />
+                <t t-if="call.duration"> • <t t-esc="call.durationString" /></t>
+                    </div>
+        </div>
+        </t>
+    </t>
+</templates>

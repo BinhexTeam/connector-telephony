@@ -1,14 +1,7 @@
 from odoo import api, fields, models
 from odoo.osv import expression
 
-VOIP_STATES = [
-    ("aborted", "Aborted"),
-    ("calling", "Calling"),
-    ("missed", "Missed"),
-    ("ongoing", "Ongoing"),
-    ("rejected", "Rejected"),
-    ("terminated", "Terminated"),
-]
+VOIP_STATES = ["aborted", "calling", "missed", "ongoing", "rejected", "terminated"]
 
 VOIP_TYPE_CALL = [
     ("incoming", "Incoming"),
@@ -25,7 +18,11 @@ class VoipOcaCall(models.Model):
         VOIP_TYPE_CALL,
         default="outgoing",
     )
-    state = fields.Selection(VOIP_STATES, default="calling", index=True)
+    state = fields.Selection(
+        [(voip_state, voip_state.capitalize()) for voip_state in VOIP_STATES],
+        default="calling",
+        index=True,
+    )
     end_date = fields.Datetime()
     start_date = fields.Datetime()
     activity_name = fields.Char(
@@ -39,7 +36,10 @@ class VoipOcaCall(models.Model):
     @api.depends("state", "partner_id.name")
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = rec.partner_id.display_name
+            rec.display_name = (
+                f"{VOIP_STATES[VOIP_STATES.index(rec.state) - 1].capitalize()} "
+                + rec.partner_id.display_name
+            )
 
     def _format(self):
         return [

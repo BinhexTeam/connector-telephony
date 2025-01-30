@@ -32,7 +32,7 @@ export class VoipOCA {
         return [searchInputValue];
     }
 
-    async getRecentCalls(offset = 0, limit = 10) {
+    async getRecentCalls(offset = 0, limit = 30) {
         this._recentCallsData = this.ormService.call(
             "voip.oca.call",
             "get_recent_calls",

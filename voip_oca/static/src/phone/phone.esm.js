@@ -3,6 +3,7 @@ import {Component, useRef, useState} from "@odoo/owl";
 import {PhoneActivity} from "./phone_activity.esm";
 import {PhoneContact} from "./phone_contact.esm";
 import {PhoneRecent} from "./phone_recent.esm";
+import {VoipOcaPhoneDetail} from "./phone_detail.esm";
 import {_t} from "@web/core/l10n/translation";
 import {markEventHandled} from "@web/core/utils/misc";
 import {useDebounced} from "@web/core/utils/timing";
@@ -13,6 +14,7 @@ export class VoipOcaPhone extends Component {
         PhoneRecent,
         PhoneActivity,
         PhoneContact,
+        VoipOcaPhoneDetail,
     };
     static props = {};
 
@@ -65,6 +67,10 @@ export class VoipOcaPhone extends Component {
         } else {
             this.phoneModel.fold();
         }
+    }
+
+    get phoneDetail() {
+        return this.phoneModel.isPhoneDetail;
     }
 }
 

@@ -11,11 +11,12 @@ export class PhoneRecent extends Component {
     setup() {
         super.setup();
         this.voip_oca = useState(useService("voip_oca"));
+        this.phoneModel = useState(this.voip_oca.phoneModel);
         onMounted(() => this.voip_oca.getRecentCalls());
     }
 
     onCallDetail(call) {
-        return call;
+        this.phoneModel.openDetail({detailCall: call});
     }
 }
 

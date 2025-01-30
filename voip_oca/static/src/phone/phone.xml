@@ -27,43 +27,48 @@
                 t-attf-class="o-voip-VoipOcaPhone-content #{phoneModel.isFolded ? 'mh-95' : 'h-25'}"
                 t-if="phoneModel.isFolded"
             >
-                <div class="d-flex">
+                <VoipOcaPhoneDetail
+                    t-if="phoneDetail"
+                    detailPhone="phoneModel.selectedDetail"
+                />
+                <div t-else="">
+                    <div class="d-flex">
                             <input
-                        class="form-control border-0 shadow-none"
-                        placeholder="Search"
-                        t-model.trim="phoneModel.searchInputValue"
-                        t-ref="searchInput"
-                        t-on-input="onInputSearchBar"
-                    />
-                    <button class="oi oi-search btn shadow-none px-2" />
-                        </div>
-
-                <ul class="nav nav-tabs text-center">
-                  <li
-                        class="nav-item fs-3 fw-bold"
-                        t-foreach="tabList"
-                        t-as="tab"
-                        t-key="tab.id"
-                    >
-                    <a
-                            t-attf-class="nav-link #{phoneModel.activeTabId == tab.id ? 'active' : ''}"
-                            aria-current="page"
-                            href="#"
-                            t-att-data-id="tab.id"
-                            role="tab"
-                            t-esc="tab.name"
-                            data-bs-toggle="tab"
-                            t-on-click="onClickTab"
+                            class="form-control border-0 shadow-none"
+                            placeholder="Search"
+                            t-model.trim="phoneModel.searchInputValue"
+                            t-ref="searchInput"
+                            t-on-input="onInputSearchBar"
                         />
+                        <button class="oi oi-search btn shadow-none px-2" />
+                        </div>
+                    <ul class="nav nav-tabs text-center">
+                  <li
+                            class="nav-item fs-3 fw-bold"
+                            t-foreach="tabList"
+                            t-as="tab"
+                            t-key="tab.id"
+                        >
+                    <a
+                                t-attf-class="nav-link #{phoneModel.activeTabId == tab.id ? 'active' : ''}"
+                                aria-current="page"
+                                href="#"
+                                t-att-data-id="tab.id"
+                                role="tab"
+                                t-esc="tab.name"
+                                data-bs-toggle="tab"
+                                t-on-click="onClickTab"
+                            />
                   </li>
                 </ul>
-                <div class="tab-content">
+                    <div class="tab-content">
                     <PhoneRecent
-                        t-if="activeTabId == 'recent'"
-                        recentCalls="phoneModel.recentCalls"
-                    />
-                    <PhoneActivity t-if="activeTabId == 'activity'" />
-                    <PhoneContact t-if="activeTabId == 'contacts'" />
+                            t-if="activeTabId == 'recent'"
+                            recentCalls="phoneModel.recentCalls"
+                        />
+                        <PhoneActivity t-if="activeTabId == 'activity'" />
+                        <PhoneContact t-if="activeTabId == 'contacts'" />
+                </div>
                 </div>
             </div>
         </div>

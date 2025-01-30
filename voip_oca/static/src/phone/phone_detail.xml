@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOcaPhoneDetail">
+        <div
+            class="o-voip-VoipOcaPhoneDetail d-flex flex-column justify-content-center align-items-center"
+        >
+            <div class="d-flex align-items-start w-100 px-1">
+                <button class="btn" t-on-click="onDetailBack">
+                <i class="fa fa-2x fa-chevron-left" />
+            </button>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <img
+                    class="text-fluid w-100 h-100 rounded-circle mt-3"
+                    t-att-src="props.detailPhone.avatarUrl"
+                />
+            </div>
+            <t t-if="partner">
+                <div
+                    class="d-flex flex-column justify-content-center align-items-center mt-1"
+                >
+                    <span t-esc="partner.name" />
+                    <span t-esc="partner.displayName" />
+                    <span t-esc="callMobileNumber" />
+                </div>
+            </t>
+            <div t-if="detailCall.callDate" class="small text-muted">
+                <span class="mx-2" t-att-class="detailCall.iconTypeCall" />
+                <t t-esc="detailCall.callDate" />
+                <t t-if="detailCall.duration"> • <t
+                        t-esc="detailCall.durationString"
+                    /></t>
+                        </div>
+            <div class="d-flex flex-column justify-content-center w-100">
+                <div class="fw-bold fs-5 p-3">
+                    Actions
+                </div>
+                <div class="d-flex justify-content-between px-3">
+                    <button class="btn" title="Send email" t-on-click="onSendEmail"><i
+                            class="fa fa-2x fa-envelope-o"
+                        /></button>
+                    <button
+                        class="btn"
+                        title="Info contact"
+                        t-on-click="onInfoContact"
+                    ><i class="fa fa-2x  fa-user" /></button>
+                    <button
+                        class="btn"
+                        title="Schedule activity"
+                        t-on-click="onCreateActivity"
+                    ><i class="fa fa-2x fa-clock-o" /></button>
+                </div>
+            </div>
+
+
+        </div>
+    </t>
+</templates>

@@ -1,12 +1,15 @@
 /** @odoo-module **/
+import {PhoneDetailModel} from "./phone_detail_model.esm";
 import {isSubstring} from "@voip_oca/utils/utils.esm";
 
 export class PhoneModel {
     activeTabId = "recent";
     isDisplayed = false;
     isFolded = false;
+    isPhoneDetail = false;
 
     searchInputValue = "";
+    selectedDetail;
 
     constructor(store, voip) {
         this.store = store;
@@ -57,5 +60,14 @@ export class PhoneModel {
                         contact.landlineNumber,
                     ].some((x) => isSubstring(x, this.searchInputValue)))
         );
+    }
+
+    openDetail({detailCall, detailActivity, detailContact}) {
+        this.selectedDetail = new PhoneDetailModel({
+            detailCall,
+            detailActivity,
+            detailContact,
+        });
+        this.isPhoneDetail = true;
     }
 }

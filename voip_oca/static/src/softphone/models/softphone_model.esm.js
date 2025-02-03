@@ -1,8 +1,9 @@
 /** @odoo-module **/
-import {PhoneDetailModel} from "./phone_detail_model.esm";
+import {SoftphoneDetailModel} from "./softphone_detail_model.esm";
 import {isSubstring} from "@voip_oca/utils/utils.esm";
+import {url} from "@web/core/utils/urls";
 
-export class PhoneModel {
+export class SoftphoneModel {
     activeTabId = "recent";
     isDisplayed = false;
     isFolded = false;
@@ -10,6 +11,17 @@ export class PhoneModel {
 
     searchInputValue = "";
     selectedDetail;
+    enableNumpad = false;
+    shouldFocus = false;
+    numpad = {
+        isOpen: false,
+        value: "",
+        selection: {
+            start: 0,
+            end: 0,
+            direction: "none",
+        },
+    };
 
     constructor(store, voip) {
         this.store = store;
@@ -63,11 +75,19 @@ export class PhoneModel {
     }
 
     openDetail({detailCall, detailActivity, detailContact}) {
-        this.selectedDetail = new PhoneDetailModel({
+        this.selectedDetail = new SoftphoneDetailModel({
             detailCall,
             detailActivity,
             detailContact,
         });
         this.isPhoneDetail = true;
+    }
+
+    urlImagePartner(partner_id) {
+        return url("/web/image", {
+            model: "res.partner",
+            id: partner_id,
+            field: "avatar_128",
+        });
     }
 }

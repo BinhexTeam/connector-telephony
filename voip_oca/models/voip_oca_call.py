@@ -61,7 +61,12 @@ class VoipOcaCall(models.Model):
     def get_recent_calls(self, search_terms=None, offset=0, limit=10):
         domain = [("user_id", "=", self.env.uid)]
         if search_terms:
-            search_fields = ["phone_number", "partner_id.name", "activity_name"]
+            search_fields = [
+                "display_name",
+                "phone_number",
+                "partner_id.name",
+                "activity_name",
+            ]
             search_domain = expression.OR(
                 [[(field, "ilike", search_terms)] for field in search_fields]
             )

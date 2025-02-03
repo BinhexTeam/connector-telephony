@@ -1,20 +1,24 @@
 /** @odoo-module **/
 import {Component, useRef, useState} from "@odoo/owl";
-import {PhoneActivity} from "./phone_activity.esm";
-import {PhoneContact} from "./phone_contact.esm";
-import {PhoneRecent} from "./phone_recent.esm";
-import {VoipOcaPhoneDetail} from "./phone_detail.esm";
+import {
+    SoftphoneActivity,
+    SoftphoneContact,
+    SoftphoneDetail,
+    SoftphoneNumpad,
+    SoftphoneRecent,
+} from "@voip_oca/softphone/components/components.esm";
 import {_t} from "@web/core/l10n/translation";
 import {markEventHandled} from "@web/core/utils/misc";
 import {useDebounced} from "@web/core/utils/timing";
 import {useService} from "@web/core/utils/hooks";
 
-export class VoipOcaPhone extends Component {
+export class VoipOCASoftphone extends Component {
     static components = {
-        PhoneRecent,
-        PhoneActivity,
-        PhoneContact,
-        VoipOcaPhoneDetail,
+        SoftphoneRecent,
+        SoftphoneActivity,
+        SoftphoneContact,
+        SoftphoneDetail,
+        SoftphoneNumpad,
     };
     static props = {};
 
@@ -45,13 +49,13 @@ export class VoipOcaPhone extends Component {
     searchInput() {
         switch (this.activeTabId) {
             case "contacts":
-                this.voip_oca.getContacts(this.phoneModel.searchInputValue);
+                this.voip_oca.getContacts();
                 break;
             case "activity":
-                this.voip_oca.getActivities(this.phoneModel.searchInputValue);
+                this.voip_oca.getActivities();
                 break;
             case "recent":
-                this.voip_oca.getRecentCalls(this.phoneModel.searchInputValue);
+                this.voip_oca.getRecentCalls();
                 break;
         }
     }
@@ -72,6 +76,10 @@ export class VoipOcaPhone extends Component {
     get phoneDetail() {
         return this.phoneModel.isPhoneDetail;
     }
+    openNumpad() {
+        this.phoneModel.enableNumpad = !this.phoneModel.enableNumpad;
+        this.phoneModel.shouldFocus = !this.phoneModel.shouldFocus;
+    }
 }
 
-VoipOcaPhone.template = "voip_oca.VoipOcaPhone";
+VoipOCASoftphone.template = "voip_oca.VoipOCASoftphone";

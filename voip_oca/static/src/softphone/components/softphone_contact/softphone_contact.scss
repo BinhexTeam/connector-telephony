@@ -1,0 +1,10 @@
+div.o-voip-SoftphoneContact {
+    @include shadow-softphone;
+    border-radius: 8px;
+
+    @include hover-phone-community;
+
+    img {
+        object-fit: contain !important;
+    }
+}

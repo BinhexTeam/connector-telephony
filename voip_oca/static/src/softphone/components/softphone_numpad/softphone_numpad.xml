@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.SoftphoneNumpad">
+        <div class="d-flex flex-column o-voip-SoftphoneNumpad">
+            <div class="d-flex ">
+                            <input
+                    class="form-control border-0 shadow-none"
+                    placeholder="Enter number..."
+                    t-model.trim="phoneModel.numpad.value"
+                    t-ref="phoneNumpadValue"
+                    t-on-keydown="onPhoneNumpadValue"
+                />
+                        </div>
+
+            <div
+                class="d-flex justify-content-between row row-cols-4 m-auto mt-0 div-numpad-key"
+                t-on-click="onNumpadKeyClick"
+            >
+            <button
+                    t-foreach="keyboardActions"
+                    t-as="action"
+                    t-key="action"
+                    t-esc="action"
+                    class="btn btn-light py-4 fw-normal fs-2 m-2 numpad-key"
+                />
+        </div>
+        </div>
+    </t>
+</templates>

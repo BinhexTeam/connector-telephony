@@ -1,12 +1,12 @@
 /** @odoo-module **/
 
 import {Component, useState} from "@odoo/owl";
-import {VoipOcaPhone} from "@voip_oca/phone/phone.esm";
+import {VoipOCASoftphone} from "@voip_oca/softphone/softphone.esm";
 import {useService} from "@web/core/utils/hooks";
 
-export class VoipOCAPhoneContainer extends Component {
+export class VoipOCASoftphoneContainer extends Component {
     static props = {};
-    static components = {VoipOcaPhone};
+    static components = {VoipOCASoftphone};
 
     setup() {
         super.setup();
@@ -14,4 +14,4 @@ export class VoipOCAPhoneContainer extends Component {
     }
 }
 
-VoipOCAPhoneContainer.template = "voip_oca.VoipOCAPhoneContainer";
+VoipOCASoftphoneContainer.template = "voip_oca.VoipOCASoftphoneContainer";

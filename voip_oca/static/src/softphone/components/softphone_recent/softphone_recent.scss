@@ -1,0 +1,13 @@
+div.o-voip-SoftphoneRecent {
+    @include shadow-softphone;
+    border-radius: 8px;
+
+    @include hover-phone-community;
+
+    img {
+        object-fit: contain !important;
+    }
+    span.fa-phone {
+        font-size: 1.5rem !important;
+    }
+}

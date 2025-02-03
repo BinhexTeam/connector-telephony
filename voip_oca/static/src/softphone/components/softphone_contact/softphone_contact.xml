@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="voip_oca.SoftphoneContact">
+
+        <t t-if="props.contacts.length > 0">
+        <t t-foreach="props.contacts" t-as="contact" t-key="contact.id">
+            <div
+                    class="o-voip-SoftphoneContact d-flex bg-white px-3 pt-2 cursor-pointer m-2"
+                    t-on-click="() => this.onClickContact(contact)"
+                >
+                <div class="row">
+                    <div class="col-2">
+                        <img
+                                class="text-fluid w-100 h-75 rounded-circle"
+                                t-att-src="imagePartner(contact)"
+                            />
+                    </div>
+                    <div class="col-8">
+                        <div class="fw-bold" t-esc="contact.name" />
+                        <div t-esc="contact.displayName" />
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+
+
+<!--        <t t-if="voip_oca.phoneModel.contacts.length > 0">-->
+<!--                <div-->
+<!--                t-foreach="voip_oca.phoneModel.contacts"-->
+<!--                t-as="contact"-->
+<!--                t-key="contact.localId"-->
+<!--                class="list-group-item-action p-3 text-truncate cursor-pointer"-->
+<!--                t-on-click="(ev) => this.onClickContact(ev, contact)"-->
+<!--            >-->
+<!--                    <img-->
+<!--                    class="o_image_40_cover rounded"-->
+<!--                    t-att-src="getAvatarUrl(contact)"-->
+<!--                />-->
+<!--                    <span-->
+<!--                    class="ps-2 fw-bolder text-truncate"-->
+<!--                    t-att-title="contact.displayName"-->
+<!--                    t-esc="contact.displayName"-->
+<!--                />-->
+<!--                </div>-->
+<!--            </t>-->
+    </t>
+</templates>

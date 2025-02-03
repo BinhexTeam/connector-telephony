@@ -1,0 +1,12 @@
+div.o-voip-SoftphoneNumpad {
+    button.numpad-key {
+        @include hover-phone-community;
+
+        @include shadow-softphone;
+    }
+
+    height: 570px !important;
+    @include media-breakpoint-down(sm) {
+        height: 630px !important;
+    }
+}

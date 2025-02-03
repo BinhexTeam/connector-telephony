@@ -3,7 +3,7 @@
 import {Component, onMounted, useState} from "@odoo/owl";
 import {useService} from "@web/core/utils/hooks";
 
-export class PhoneRecent extends Component {
+export class SoftphoneRecent extends Component {
     static props = {
         recentCalls: {type: Array},
     };
@@ -20,4 +20,4 @@ export class PhoneRecent extends Component {
     }
 }
 
-PhoneRecent.template = "voip_oca.PhoneRecent";
+SoftphoneRecent.template = "voip_oca.SoftphoneRecent";

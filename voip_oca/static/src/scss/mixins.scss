@@ -1,3 +1,18 @@
 @mixin min-height-phone($maxHeight: 100%) {
     min-height: $maxHeight !important;
 }
+
+@mixin shadow-softphone {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@mixin hover-phone-community {
+    &:hover {
+        background-color: #71639e !important;
+        color: $white !important;
+
+        div.text-muted {
+            color: $white !important;
+        }
+    }
+}

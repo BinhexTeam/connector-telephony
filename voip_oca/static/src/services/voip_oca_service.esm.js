@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
 import {Deferred} from "@web/core/utils/concurrency";
-import {PhoneModel} from "@voip_oca/phone/models/phone_model.esm";
-import {VoipOCAPhoneContainer} from "@voip_oca/phone/phone_container.esm";
+import {SoftphoneModel} from "@voip_oca/softphone/models/softphone_model.esm";
+import {VoipOCASoftphoneContainer} from "@voip_oca/softphone/softphone_container.esm";
 import {VoipOCASystray} from "@voip_oca/web/voip_oca_systray.esm";
 import {reactive} from "@odoo/owl";
 import {registry} from "@web/core/registry";
@@ -15,7 +15,7 @@ export class VoipOCA {
         this.messaging = services["mail.messaging"];
         this.store = services["mail.store"];
         this.ormService = services.orm;
-        this.phoneModel = new PhoneModel(this.store, this);
+        this.phoneModel = new SoftphoneModel(this.store, this);
         this.baseUrlImage = "/web/image";
         this.messaging.isReady.then(() => {
             this.isReady.resolve();
@@ -32,7 +32,7 @@ export class VoipOCA {
         return [searchInputValue];
     }
 
-    async getRecentCalls(offset = 0, limit = 30) {
+    async getRecentCalls(offset = 0, limit = 100) {
         this._recentCallsData = this.ormService.call(
             "voip.oca.call",
             "get_recent_calls",
@@ -77,8 +77,8 @@ export const voipOCAService = {
     async start(env, {user}) {
         this.env = env;
         this.user = user;
-        registry.category("main_components").add("voip_oca.VoipOCAPhoneContainer", {
-            Component: VoipOCAPhoneContainer,
+        registry.category("main_components").add("voip_oca.VoipOCASoftphoneContainer", {
+            Component: VoipOCASoftphoneContainer,
         });
         registry
             .category("systray")
